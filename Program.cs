@@ -1,5 +1,8 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
+using ScreenSaver.Options;
+using ScreenSaver.Windows.Forms;
 
 namespace ScreenSaver
 {
@@ -13,24 +16,72 @@ namespace ScreenSaver
 
             if (args.Length > 0)
             {
-                if (args[0].ToLower().Trim().Substring(0, 2) == "/c")
+                string arg1 = args[0].ToLower().Trim();
+                string arg2 = null;
+
+                // Arguments can be separated by colon, eg. /c:1234567
+                if (arg1.Length > 2)
                 {
-                    MessageBox.Show(
-                        "This Screen Saver has no options you can set.",
-                        ".NET Screen Saver",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation);
+                    arg2 = arg1.Substring(3).Trim();
+                    arg1 = arg1.Substring(0, 2);
                 }
-                else if (args[0].ToLower() == "/s")
+                else if (args.Length > 1)
                 {
-                    for (int i = Screen.AllScreens.GetLowerBound(0); i <= Screen.AllScreens.GetUpperBound(0); i++)
-                        Application.Run(new ScreenSaverForm(i));
+                    arg2 = args[1];
                 }
-            }
-            else
-            {
-                for (int i = Screen.AllScreens.GetLowerBound(0); i <= Screen.AllScreens.GetUpperBound(0); i++)
-                    Application.Run(new ScreenSaverForm(i));
+
+                IntPtr previewWindowHandle = IntPtr.Zero;
+                if (arg2 != null)
+                {
+                    long pointerValue;
+                    if (long.TryParse(arg2, out pointerValue))
+                    {
+                        previewWindowHandle = new IntPtr(pointerValue);
+                    }
+                }
+
+                switch (arg1)
+                {
+                    case "/c": // configure
+#if (DEBUG)
+                        new UserOptionsForm(Point.Empty).ShowDialog();
+#else
+                        if (previewWindowHandle != IntPtr.Zero)
+                        {
+                            var screenSaverSettingsWindow = new ParentWindow(previewWindowHandle);
+                            var screenSaverSettingsWindowBounds = screenSaverSettingsWindow.Bounds;
+                            if (screenSaverSettingsWindowBounds != Rectangle.Empty)
+                            {
+                                var userOptionsForm = new UserOptionsForm(
+                                    new Point(
+                                        screenSaverSettingsWindowBounds.X + 10,
+                                        screenSaverSettingsWindowBounds.Y + 10));
+
+                                userOptionsForm.ShowDialog(screenSaverSettingsWindow);
+                            }
+                        }
+                        else
+                        {
+                            new UserOptionsForm(Point.Empty).ShowDialog();
+                        }
+#endif
+                        return;
+
+                    case "/p": // preview
+                        if (previewWindowHandle != IntPtr.Zero)
+                        {
+                            Application.Run(new ScreenSaverForm(previewWindowHandle));
+                        }
+                        break;
+
+                    case "/s": // show
+                    default:
+                        foreach (Screen screen in Screen.AllScreens)
+                        {
+                            Application.Run(new ScreenSaverForm(IntPtr.Zero));
+                        }
+                        break;
+                }
             }
         }
     }

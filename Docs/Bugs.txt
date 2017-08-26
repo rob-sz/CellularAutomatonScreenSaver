@@ -1,0 +1,4 @@
+﻿
+
+
+- Number of rules total and number of rules used on user options form is not calculated correctly.

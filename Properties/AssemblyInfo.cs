@@ -5,12 +5,12 @@ using System.Reflection;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 //
-[assembly: AssemblyTitle("")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Edge of Chaos")]
+[assembly: AssemblyDescription("1D Cellular Automata Screen Saver")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("Robert Szczechowicz")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 

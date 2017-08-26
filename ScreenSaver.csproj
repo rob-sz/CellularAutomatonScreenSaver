@@ -9,7 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ApplicationIcon>App.ico</ApplicationIcon>
     <AssemblyKeyContainerName />
-    <AssemblyName>ScreenSaver</AssemblyName>
+    <AssemblyName>EdgeOfChaos</AssemblyName>
     <AssemblyOriginatorKeyFile />
     <DefaultClientScript>JScript</DefaultClientScript>
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
@@ -20,7 +20,7 @@
     <StartupObject />
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>0.0</OldToolsVersion>
@@ -80,6 +80,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -89,6 +93,7 @@
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
     </Reference>
@@ -97,13 +102,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canvas.cs" />
-    <Compile Include="CellularAutomatonScreenSaver.cs" />
-    <Compile Include="CellularAutomatonWorld.cs" />
-    <Compile Include="BoolParameter.cs" />
-    <Compile Include="ColorParameter.cs" />
-    <Compile Include="IScreenSaver.cs" />
-    <Compile Include="ByteParameter.cs" />
+    <Compile Include="CaRule.cs" />
+    <Compile Include="CaRuleSet.cs" />
+    <Compile Include="CaRuleSetGenerator.cs" />
+    <Compile Include="CaWorldGraphics.cs" />
+    <Compile Include="CaWorld.cs" />
+    <Compile Include="CaWorldOptions.cs" />
+    <Compile Include="CaWorldOptionsRepository.cs" />
+    <Compile Include="Options\UserOptionsContext.cs" />
+    <Compile Include="Options\UserOptionsFile.cs" />
+    <Compile Include="Options\UserOptionsProfileRepository.cs" />
+    <Compile Include="Windows\Forms\ColorDialogExtended.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Options\UserOptionsProfileSet.cs" />
+    <Compile Include="Options\UserOptionsProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -115,19 +128,38 @@
     <Compile Include="Program.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RandomParameter.cs" />
-    <Compile Include="CellularAutomatonCanvas.cs" />
     <Compile Include="ScreenSaverForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ScreenSaverForm.Designer.cs">
       <DependentUpon>ScreenSaverForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Options\UserOptions.cs" />
+    <Compile Include="Options\UserOptionsData.cs" />
+    <Compile Include="Options\UserOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options\UserOptionsForm.Designer.cs">
+      <DependentUpon>UserOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Forms\ComboBoxExtended.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\MessageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Forms\MessageDialog.Designer.cs">
+      <DependentUpon>MessageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Forms\ParentWindow.cs" />
+    <Compile Include="Windows\OS\WinApi.cs" />
     <Content Include="App.ico" />
+    <Content Include="Docs\Bugs.txt" />
+    <Content Include="Docs\Info.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Docs\1D Cellular Automata Info.pdf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,10 +181,17 @@
     <EmbeddedResource Include="ScreenSaverForm.resx">
       <DependentUpon>ScreenSaverForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Options\UserOptionsForm.resx">
+      <DependentUpon>UserOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Forms\MessageDialog.resx">
+      <DependentUpon>MessageDialog.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />
-    <PostBuildEvent>rem move /Y "$(TargetPath)" "$(TargetName).scr"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

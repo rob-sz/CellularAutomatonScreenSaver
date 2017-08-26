@@ -22,41 +22,5 @@ namespace ScreenSaver.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Main_BlackAfterHH {
-            get {
-                return ((int)(this["Main_BlackAfterHH"]));
-            }
-            set {
-                this["Main_BlackAfterHH"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Main_BlackAfterMM {
-            get {
-                return ((int)(this["Main_BlackAfterMM"]));
-            }
-            set {
-                this["Main_BlackAfterMM"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int Main_BlackAfterSS {
-            get {
-                return ((int)(this["Main_BlackAfterSS"]));
-            }
-            set {
-                this["Main_BlackAfterSS"] = value;
-            }
-        }
     }
 }
