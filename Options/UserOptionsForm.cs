@@ -460,7 +460,8 @@ namespace ScreenSaver.Options
         {
             if (enabled)
             {
-                for (int i = 0; i < _cellStateColors.Length; i++)
+                _cellStateColorPanels[0].BackColor = _cellStateColors[0];
+                for (int i = 1; i < _cellStateColors.Length; i++)
                 {
                     _cellStateColorPanels[i].BackColor = _cellStateColors[i];
                     _cellStateColorPanels[i].Enabled = true;
@@ -468,11 +469,8 @@ namespace ScreenSaver.Options
             }
             else
             {
-                for (var i = 0; i < _cellStateColorPanels.Length; i++)
-                {
-                    _cellStateColors[i] = _cellStateColorPanels[i].BackColor;
-                }
-                for (var i = 0; i < _cellStateColorPanels.Length; i++)
+                _cellStateColorPanels[0].BackColor = Color.FromArgb(100, _cellStateColorPanels[0].BackColor);
+                for (var i = 1; i < _cellStateColorPanels.Length; i++)
                 {
                     _cellStateColorPanels[i].BackColor = Color.FromArgb(100, _cellStateColorPanels[i].BackColor);
                     _cellStateColorPanels[i].Enabled = false;

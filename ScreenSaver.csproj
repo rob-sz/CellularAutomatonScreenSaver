@@ -191,7 +191,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent />
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy /Y $(TargetFileName) $(TargetName).scr</PostBuildEvent>
   </PropertyGroup>
 </Project>

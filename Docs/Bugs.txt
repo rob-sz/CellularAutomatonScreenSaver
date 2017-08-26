@@ -2,3 +2,5 @@
 
 
 - Number of rules total and number of rules used on user options form is not calculated correctly.
+- When randomizing number of neighbours, need to only select the valid values.
+	eg. if range is 3-5, then cannot choose 4, however code will round down, so actually might be ok, need to verify.
