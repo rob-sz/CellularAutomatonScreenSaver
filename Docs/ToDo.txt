@@ -1,0 +1,4 @@
+﻿
+
+
+- Embed Newtonsoft.Json package in scr file.

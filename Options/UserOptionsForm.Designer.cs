@@ -1417,7 +1417,7 @@
             0,
             0});
             this.IterationInterval.Minimum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});

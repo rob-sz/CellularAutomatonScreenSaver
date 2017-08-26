@@ -155,6 +155,7 @@
     <Compile Include="Windows\OS\WinApi.cs" />
     <Content Include="App.ico" />
     <Content Include="Docs\Bugs.txt" />
+    <Content Include="Docs\ToDo.txt" />
     <Content Include="Docs\Info.txt" />
   </ItemGroup>
   <ItemGroup>
